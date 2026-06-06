@@ -38,7 +38,25 @@ const http = axios.create({
 
 http.interceptors.request.use((cfg) => {
   const token = tokenStore.access();
-  if (token) cfg.headers.Authorization = `Bearer ${token}`;
+
+  // Parse payload to check if this is a login or registration call.
+  // These should never carry an Authorization header.
+  let isPublicMethod = false;
+  try {
+    const body = typeof cfg.data === "string" ? JSON.parse(cfg.data) : cfg.data;
+    const method = body?.data?.method;
+    isPublicMethod =
+      method === "login" ||
+      method === "register_patient" ||
+      method === "register_doctor" ||
+      method === "register_receptionist";
+  } catch {
+    // ignore parse errors
+  }
+
+  if (token && !isPublicMethod) {
+    cfg.headers.Authorization = `Bearer ${token}`;
+  }
   return cfg;
 });
 
