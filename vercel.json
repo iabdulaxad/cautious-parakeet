@@ -1,6 +1,10 @@
 {
   "rewrites": [
     {
+      "source": "/api",
+      "destination": "https://matrix2-hospital.knative-fn.u-code.io/"
+    },
+    {
       "source": "/api/:path*",
       "destination": "https://matrix2-hospital.knative-fn.u-code.io/:path*"
     }
