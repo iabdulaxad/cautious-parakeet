@@ -90,7 +90,7 @@ function unwrap(payload) {
 }
 
 async function rawInvoke(method, objectData) {
-  const url = `/api/?project-id=${config.projectId}`;
+  const url = `/?project-id=${config.projectId}`;
   try {
     const res = await http.post(url, {
       data: { method, object_data: objectData || {} },

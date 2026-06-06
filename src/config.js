@@ -1,7 +1,7 @@
 // App configuration, read from Vite env vars with sensible defaults that match
 // the Postman collection. Override per-environment via a .env file.
 const config = {
-    baseUrl: import.meta.env.VITE_API_BASE_URL,
+    baseUrl: import.meta.env.VITE_API_BASE_URL || "https://matrix2-hospital.knative-fn.u-code.io",
     functionSlug: import.meta.env.VITE_FUNCTION_SLUG || "matrix2-hospital",
     projectId:
         import.meta.env.VITE_PROJECT_ID || "602351f4-4fdb-4d6e-a5f6-370cf1bc1626",
